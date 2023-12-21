@@ -1,0 +1,63 @@
+../extract_data/split\AbsoluteMove0.xml
+['<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsdl="http://www.onvif.org/ver20/ptz/wsdl" xmlns:sch="http://www.onvif.org/ver10/schema">\n', '   <soap:Header/>\n', '   <soap:Body>\n', '      <wsdl:AbsoluteMove>\n', '         <!--type: ReferenceToken-->\n', '         <wsdl:ProfileToken>?</wsdl:ProfileToken>\n', '         <wsdl:Position>\n', '            <!--Optional:-->\n', '            <sch:PanTilt x="?" y="?" space="?"/>\n', '            <!--Optional:-->\n', '            <sch:Zoom x="?" space="?"/>\n', '         </wsdl:Position>\n', '         <!--Optional:-->\n', '         <wsdl:Speed>\n', '            <!--Optional:-->\n', '            <sch:PanTilt x="?" y="?" space="?"/>\n', '            <!--Optional:-->\n', '            <sch:Zoom x="?" space="?"/>\n', '         </wsdl:Speed>\n', '      </wsdl:AbsoluteMove>\n', '   </soap:Body>\n', '</soap:Envelope>']
+
+
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsdl="http://www.onvif.org/ver20/ptz/wsdl" xmlns:sch="http://www.onvif.org/ver10/schema">
+   <soap:Header/>
+   <soap:Body>
+      <wsdl:AbsoluteMove>
+         <!--type: ReferenceToken-->
+         <wsdl:ProfileToken>oal-e\_kmTEcdcS?<9;7tlx|ob#!Fi\(7</wsdl:ProfileToken>
+         <wsdl:Position>
+            <!--Optional:-->
+            <sch:PanTilt x="/]l$-fI*i" y="M9TIF@z6&\c$jaQs{8[Wvgj."uj*BsdSo&s\N6f1J[fwIt" space="t7f+XS"R-78f8/v4~%4LJpx1"/>
+            <!--Optional:-->
+            <sch:Zoom x="p&n!W[G?ySn``u-It}P5}jkYBgKeC#l`" space="N6i-Gj_2zmYy{6#EUA$`1w-AM"/>
+         </wsdl:Position>
+         <!--Optional:-->
+         <wsdl:Speed>
+            <!--Optional:-->
+            <sch:PanTilt x="T't")8Qr" y="g<vs(i|Pva\]h" space="lsBf3YPA]WJ'=M2O^,t'lHJ0Z+J&o`WJBM|.YgS4D!vWN"/>
+            <!--Optional:-->
+            <sch:Zoom x="j9YM2" space="9xZ=9uK.V@/SAv%+6\8[d}7[ndU8ir.QSLM^^-Q+L+y$Jj'_"/>
+         </wsdl:Speed>
+      </wsdl:AbsoluteMove>
+   </soap:Body>
+</soap:Envelope>
+
+
+
+../extract_data/split\AccessDoor0.xml
+['<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsdl="http://www.onvif.org/ver10/doorcontrol/wsdl">\n', '   <soap:Header/>\n', '   <soap:Body>\n', '      <wsdl:AccessDoor>\n', '         <!--type: ReferenceToken-->\n', '         <wsdl:Token>?</wsdl:Token>\n', '         <!--Optional:-->\n', '         <!--type: boolean-->\n', '         <wsdl:UseExtendedTime>?</wsdl:UseExtendedTime>\n', '         <!--Optional:-->\n', '         <!--type: duration-->\n', '         <wsdl:AccessTime>?</wsdl:AccessTime>\n', '         <!--Optional:-->\n', '         <!--type: duration-->\n', '         <wsdl:OpenTooLongTime>?</wsdl:OpenTooLongTime>\n', '         <!--Optional:-->\n', '         <!--type: duration-->\n', '         <wsdl:PreAlarmTime>?</wsdl:PreAlarmTime>\n', '         <!--Optional:-->\n', '         <wsdl:Extension>\n', '            <!--You may enter ANY elements at this point-->\n', '         </wsdl:Extension>\n', '      </wsdl:AccessDoor>\n', '   </soap:Body>\n', '</soap:Envelope>']
+
+
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsdl="http://www.onvif.org/ver10/doorcontrol/wsdl">
+   <soap:Header/>
+   <soap:Body>
+      <wsdl:AccessDoor>
+         <!--type: ReferenceToken-->
+         <wsdl:Token>AR$QP6Ik&.-)pFGVrdYe\fA\tO%T3$iNH`!-CS#k@c^</wsdl:Token>
+         <!--Optional:-->
+         <!--type: boolean-->
+         <wsdl:UseExtendedTime>Q+Du9"^]r'<<is'F_v##_YPq{*+';/5fViV]0f:;jO</wsdl:UseExtendedTime>
+         <!--Optional:-->
+         <!--type: duration-->
+         <wsdl:AccessTime><zS%_W."gd5kL2Rs!]@</wsdl:AccessTime>
+         <!--Optional:-->
+         <!--type: duration-->
+         <wsdl:OpenTooLongTime>_dT.V1wj>cBz:<)~s#q]</wsdl:OpenTooLongTime>
+         <!--Optional:-->
+         <!--type: duration-->
+         <wsdl:PreAlarmTime>@g/7U/~VKY0VDKbO-Ip(/</wsdl:PreAlarmTime>
+         <!--Optional:-->
+         <wsdl:Extension>
+            <!--You may enter ANY elements at this point-->
+         </wsdl:Extension>
+      </wsdl:AccessDoor>
+   </soap:Body>
+</soap:Envelope>
+
+
+
