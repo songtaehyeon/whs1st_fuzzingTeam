@@ -106,22 +106,32 @@ static void plugin_exit(qemu_plugin_id_t id, void *p)
     qemu_plugin_outs(report->str);
 }
 
+long long current_timestamp() {
+    struct timeval te;
+    gettimeofday(&te, NULL);
+    long long microseconds = te.tv_sec * 1000000LL + te.tv_usec;
+    return microseconds;
+}
+
 char* get_current_timestamp(void) {
-    time_t now;
-    time(&now);
+    long long timestamp = current_timestamp();
 
     // UTC로 변환
-    struct tm *tm_info_utc = gmtime(&now);
+    time_t seconds = timestamp / 1000000;
+    struct tm *tm_info_utc = gmtime(&seconds);
 
     // GMT+9로 시간대 조정
     tm_info_utc->tm_hour += 9;
     time_t adjusted_timestamp = mktime(tm_info_utc);
 
+    // 마이크로초 계산
+    long long microseconds = timestamp % 1000000;
+
     // 형식화된 날짜와 시간 문자열 생성
     struct tm *tm_info_local = localtime(&adjusted_timestamp);
-    static char buffer[20];  // static 배열을 사용하여 지역 변수가 함수를 빠져나갈 때도 메모리가 보존되도록 함
+    static char buffer[40];  // 충분한 크기로 조정
     strftime(buffer, sizeof(buffer), "%Y-%m-%dZ%H:%M:%S", tm_info_local);
-
+    sprintf(buffer + 19, ".%06lld", microseconds);  // 마이크로초 추가 (6자리로)
 
     return buffer;
 }
@@ -156,6 +166,7 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
 
     bool is_sofia_text_segment = false;
     size_t n = qemu_plugin_tb_n_insns(tb);
+    // const char* code_block_exectime = get_current_timestamp();
     for (size_t i = 0; i < n; i++) {
         insn = qemu_plugin_tb_get_insn(tb, i);
         insn_vaddr = qemu_plugin_insn_vaddr(insn);
@@ -165,8 +176,8 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
             is_sofia_text_segment = true;
 
         insn_disas = qemu_plugin_insn_disas(insn);
-        gchar* temp = g_strdup_printf("--- 0x%"PRIx64": \"%s\"\n",
-            insn_vaddr, insn_disas);
+        gchar* temp = g_strdup_printf("[%s] --- 0x%"PRIx64": \"%s\"\n",
+            get_current_timestamp(), insn_vaddr, insn_disas);
         if (blk->instset != NULL) {
             blk->instset = g_strconcat(blk->instset, temp, NULL);
         } else {
@@ -176,8 +187,9 @@ static void vcpu_tb_trans(qemu_plugin_id_t id, struct qemu_plugin_tb *tb)
 	//printf("[RUNNING] Code Block executions: %ld (# of instructions: %ld)\n%s\n", blk->exec_count, blk->insns, blk->instset);
 
     if(is_sofia_text_segment)
-	    save_to_file("coverage.txt", "[%s] Code Block executions: %ld (# of instructions: %ld)\n%s\n",
-             get_current_timestamp(), blk->exec_count, blk->insns, blk->instset);
+	    save_to_file("coverage.txt", "[RUNNING] Code Block executions: %ld (# of instructions: %ld)\n%s\n",
+             blk->exec_count, blk->insns, blk->instset);
+
     g_hash_table_insert(table, (gpointer) hash, (gpointer) blk);
     g_mutex_unlock(&lock);
 
