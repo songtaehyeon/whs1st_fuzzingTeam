@@ -8,13 +8,11 @@ import requests
 
 target_ip = "192.168.47.130"
 target_port = 8899
+total_tag = []
 
 random.seed(1234)
 
 cnt = 0
-
-# socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# socket.connect((target_ip,target_port))
 
 url = f'http://{target_ip}:{target_port}/onvif/device_service'
 headers = {
@@ -26,18 +24,20 @@ file_list = os.listdir(data_folder)
 while 1:
    for file_name in file_list[0:]: 
       file_path = os.path.join(data_folder, file_name)
-      packets = process_file(file_path)
-      for pkt in packets:
-         print('\n\n'+file_path)
-         print(pkt)
-         try:
-            response = requests.post(url, data=pkt, headers=headers)
-         except:
-            response = ''
-         # socket.sendall(pkt)
-         time.sleep(0.1)
-         print(cnt)
-         cnt += 1
+      print(file_path)
+      ori_data = process_file(file_path,total_tag)
+      packets = ori_data[0]
+      total_tag = ori_data[1]
+      print(packets)
+      print('\n\n'+file_path)
+      try:
+         response = requests.post(url, data=packets, headers=headers)
+      except:
+         response = ''
+      # socket.sendall(pkt)
+      time.sleep(0.1)
+      print(cnt)
+      cnt += 1
 
 
 socket.close()
