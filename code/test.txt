@@ -1,63 +1,31 @@
-../extract_data/split\AbsoluteMove0.xml
-['<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsdl="http://www.onvif.org/ver20/ptz/wsdl" xmlns:sch="http://www.onvif.org/ver10/schema">\n', '   <soap:Header/>\n', '   <soap:Body>\n', '      <wsdl:AbsoluteMove>\n', '         <!--type: ReferenceToken-->\n', '         <wsdl:ProfileToken>?</wsdl:ProfileToken>\n', '         <wsdl:Position>\n', '            <!--Optional:-->\n', '            <sch:PanTilt x="?" y="?" space="?"/>\n', '            <!--Optional:-->\n', '            <sch:Zoom x="?" space="?"/>\n', '         </wsdl:Position>\n', '         <!--Optional:-->\n', '         <wsdl:Speed>\n', '            <!--Optional:-->\n', '            <sch:PanTilt x="?" y="?" space="?"/>\n', '            <!--Optional:-->\n', '            <sch:Zoom x="?" space="?"/>\n', '         </wsdl:Speed>\n', '      </wsdl:AbsoluteMove>\n', '   </soap:Body>\n', '</soap:Envelope>']
-
-
-
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsdl="http://www.onvif.org/ver20/ptz/wsdl" xmlns:sch="http://www.onvif.org/ver10/schema">
-   <soap:Header/>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsdl="http://www.onvif.org/ver10/accesscontrol/wsdl">
+   <soap:Header>
    <soap:Body>
-      <wsdl:AbsoluteMove>
-         <!--type: ReferenceToken-->
-         <wsdl:ProfileToken>oal-e\_kmTEcdcS?<9;7tlx|ob#!Fi\(7</wsdl:ProfileToken>
-         <wsdl:Position>
-            <!--Optional:-->
-            <sch:PanTilt x="/]l$-fI*i" y="M9TIF@z6&\c$jaQs{8[Wvgj."uj*BsdSo&s\N6f1J[fwIt" space="t7f+XS"R-78f8/v4~%4LJpx1"/>
-            <!--Optional:-->
-            <sch:Zoom x="p&n!W[G?ySn``u-It}P5}jkYBgKeC#l`" space="N6i-Gj_2zmYy{6#EUA$`1w-AM"/>
-         </wsdl:Position>
+      <wsdl:GetAreaInfoList>
          <!--Optional:-->
-         <wsdl:Speed>
-            <!--Optional:-->
-            <sch:PanTilt x="T't")8Qr" y="g<vs(i|Pva\]h" space="lsBf3YPA]WJ'=M2O^,t'lHJ0Z+J&o`WJBM|.YgS4D!vWN"/>
-            <!--Optional:-->
-            <sch:Zoom x="j9YM2" space="9xZ=9uK.V@/SAv%+6\8[d}7[ndU8ir.QSLM^^-Q+L+y$Jj'_"/>
-         </wsdl:Speed>
-      </wsdl:AbsoluteMove>
+         <!--type: int-->
+         <wsdl:Limit>6=LM3DC4Uqv7`.jn%@>Ier3;&i;r|E[0hF$r*T8h}RvHvTAwL</wsdl:Limit>
+         <!--Optional:-->
+         <!--type: string-->
+         <wsdl:StartReference>^rysYB5,\xr_&_e~n&'+t)k4M7z;xnQ]mGzUp6L=Q&</wsdl:StartReference>
+      </wsdl:GetAreaInfoList>
    </soap:Body>
 </soap:Envelope>
 
 
+onvif , soap의 규격에 안맞는 패킷 보내기
 
-../extract_data/split\AccessDoor0.xml
-['<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsdl="http://www.onvif.org/ver10/doorcontrol/wsdl">\n', '   <soap:Header/>\n', '   <soap:Body>\n', '      <wsdl:AccessDoor>\n', '         <!--type: ReferenceToken-->\n', '         <wsdl:Token>?</wsdl:Token>\n', '         <!--Optional:-->\n', '         <!--type: boolean-->\n', '         <wsdl:UseExtendedTime>?</wsdl:UseExtendedTime>\n', '         <!--Optional:-->\n', '         <!--type: duration-->\n', '         <wsdl:AccessTime>?</wsdl:AccessTime>\n', '         <!--Optional:-->\n', '         <!--type: duration-->\n', '         <wsdl:OpenTooLongTime>?</wsdl:OpenTooLongTime>\n', '         <!--Optional:-->\n', '         <!--type: duration-->\n', '         <wsdl:PreAlarmTime>?</wsdl:PreAlarmTime>\n', '         <!--Optional:-->\n', '         <wsdl:Extension>\n', '            <!--You may enter ANY elements at this point-->\n', '         </wsdl:Extension>\n', '      </wsdl:AccessDoor>\n', '   </soap:Body>\n', '</soap:Envelope>']
+1.soap에 태그중에 하나를 랜덤하게 고른뒤 랜덤하게 태그를 바꿔보기 
+2.soap에 태그중에 하나를 랜덤하게 고른뒤 태그를 없애보기
+4.태그를 랜덤한 위치로 이동
 
-
-
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsdl="http://www.onvif.org/ver10/doorcontrol/wsdl">
-   <soap:Header/>
-   <soap:Body>
-      <wsdl:AccessDoor>
-         <!--type: ReferenceToken-->
-         <wsdl:Token>AR$QP6Ik&.-)pFGVrdYe\fA\tO%T3$iNH`!-CS#k@c^</wsdl:Token>
-         <!--Optional:-->
-         <!--type: boolean-->
-         <wsdl:UseExtendedTime>Q+Du9"^]r'<<is'F_v##_YPq{*+';/5fViV]0f:;jO</wsdl:UseExtendedTime>
-         <!--Optional:-->
-         <!--type: duration-->
-         <wsdl:AccessTime><zS%_W."gd5kL2Rs!]@</wsdl:AccessTime>
-         <!--Optional:-->
-         <!--type: duration-->
-         <wsdl:OpenTooLongTime>_dT.V1wj>cBz:<)~s#q]</wsdl:OpenTooLongTime>
-         <!--Optional:-->
-         <!--type: duration-->
-         <wsdl:PreAlarmTime>@g/7U/~VKY0VDKbO-Ip(/</wsdl:PreAlarmTime>
-         <!--Optional:-->
-         <wsdl:Extension>
-            <!--You may enter ANY elements at this point-->
-         </wsdl:Extension>
-      </wsdl:AccessDoor>
-   </soap:Body>
-</soap:Envelope>
+3.정말 랜덤한 위치부터 랜덤한 길이로 랜덤한 문자열 보내보기
 
 
+soap 파싱하기
+DB에서 값 꺼내기 -> 상위 5개면 다양성이 떨어질듯
 
+soap 파싱 하는 방법은
+/를 데이터값 보내기 전에 파싱을 해둔다.
+파싱한 /뒤에 >까지 리스트에 저장
+옵션이 있는 경우를 대비해서 : 와 공백을 기준으로 데이터를 뽑는다.
