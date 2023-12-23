@@ -30,8 +30,6 @@ def shuffle_list(file_data):
 def change_tag(file_data,file_tag,total_tag):
     target_tag = random.choice(file_tag) #실제 파일에 있는 태그 
     random_tag = random.choice(total_tag) # 바꿀 태그선택
-    print(target_tag)
-    print(random_tag)
     output_line = """"""
     if target_tag == random_tag:
         change_tag(file_data,file_tag, total_tag)
@@ -60,7 +58,6 @@ def del_tag(file_data,file_tag):
         else:
             tag_line.append(file_line)
     del_line = random.choice(tag_line)
-    print(del_line)
     file_data.remove(del_line)
     combine_filedata = ''.join(file_data)
     return combine_filedata

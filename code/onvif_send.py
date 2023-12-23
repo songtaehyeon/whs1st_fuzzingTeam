@@ -1,5 +1,6 @@
 import socket
 from onvif_examples import process_file
+from db_control import main_db
 import random
 import os
 import string
@@ -27,20 +28,34 @@ file_list = os.listdir(data_folder)
 
 
 while 1:
-   for file_name in file_list[0:]: 
+   for file_name in file_list: 
       file_path = os.path.join(data_folder, file_name)
       ori_data = process_file(file_path,total_tag)
       packets = ori_data[0]
       total_tag = ori_data[1]      
-      print('\n\n'+file_path)
-      try:
-         response = requests.post(url, data=packets, headers=headers)
-      except:
-         response = ''
-      # socket.sendall(pkt)
+      print('\n\n')
+      if cnt >= len(file_list):
+         break
+      else:
+         try:
+            response = requests.post(url, data=packets, headers=headers)
+         except:
+            response = ''
+
       time.sleep(0.1)
       print(cnt)
       cnt += 1
+   if cnt >= len(file_list):
+      break
 
+
+while 1:
+   print("===========IN DB===========")
+   new_packets = main_db()
+   print(new_packets)
+   try:
+      response = requests.post(url, data=new_packets, headers=headers)
+   except:
+      response = ''
 
 socket.close()
