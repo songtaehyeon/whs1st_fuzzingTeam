@@ -10,7 +10,8 @@ def create_connection(db_file):
         conn = sqlite3.connect(db_file)
         return conn
     except Error as e:
-        print(e)
+    	print("error")
+    	print(e)
 
 
 def read_db(conn,num,row_num):
@@ -37,6 +38,7 @@ def read_db(conn,num,row_num):
 				lines = row[num]
 				return lines
 	except Error as e:
+		print("error")
 		print(e)
 
 	
@@ -46,5 +48,4 @@ def main_db():
 	conn = create_connection(db_file)
 	row_num = read_db(conn,0,row_num)
 	line_data = read_db(conn,3,row_num)
-	print(line_data)
-	yield line_data
+	return line_data
