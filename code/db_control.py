@@ -3,12 +3,6 @@ from sqlite3 import Error
 from datetime import datetime
 import random
 
-"""
-필요한 것들
-
-1. DB에서 오름차순으로 정렬후 데이터 가져오기
-2. 가져온 데이터를 다시 웹캠에 보내기
-"""
 
 def create_connection(db_file):
     conn = None;
@@ -17,17 +11,6 @@ def create_connection(db_file):
         return conn
     except Error as e:
         print(e)
-
-def print_db(conn,sql_input):
-	try:
-		c = conn.cursor()
-		c.execute(sql_input)
-		rows = c.fetchall()
-		for row in rows:
-			row_num = row[0]
-	except Error as e:
-		print(e)
-
 
 
 def read_db(conn,num,row_num):
