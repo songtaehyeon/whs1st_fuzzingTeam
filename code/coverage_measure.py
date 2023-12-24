@@ -1,16 +1,22 @@
 import socket
-from onvif_examples import process_file
+import re
+from onvif_examples import process_file,process_db
+from db_control import main_db
 from fuzzingtable import *
 import random
 import os
 import string
 import time
 import requests
-import re
+import sqlite3
+from sqlite3 import Error
+from datetime import datetime
+
 
 ##############################################################
 target_ip = "192.168.137.136"
 target_port = 8899
+total_tag = []
 
 random.seed(1234)
 
@@ -26,27 +32,31 @@ file_list = os.listdir(data_folder)
 ##############################################################
 
 def send_fuzzing_input(file_name):
+   global total_tag
+
    file_path = os.path.join(data_folder, file_name)
-   packets = process_file(file_path)
+   ori_data = process_file(file_path,total_tag)
+   packets = ori_data[0]
+   # print(packets)
+   total_tag = ori_data[1]
 
-   pkt = ''
-   response = ' '
-
+   response = ''
    ret_arr = []
 
-   for pkt in packets:
-      print('\n\n'+file_path)
-      #print(pkt)
-      try:
-         response = requests.post(url, data=pkt, headers=headers)
-      except:
-         response = ''
-      time.sleep(0.1)
+   print('\n\n')
 
-   ret_arr.append(pkt)
+   try:
+      response = requests.post(url, data=packets, headers=headers)
+   except:
+      response = ''
+   time.sleep(0.1)
+   print(cnt)
+
+   ret_arr.append(packets)
    ret_arr.append(response)
 
    return ret_arr
+
 
 def get_coverage_count():
    with open('/home/iotfragile/qemu-c300/coverage.txt', 'r') as file:
@@ -71,9 +81,7 @@ def get_timestamp_from_coverage(cov_count):
    if filtered_lines:
       timestamp_line = filtered_lines[-cov_count]
       timestamp_line = re.search(r'\[([^]]*)\]', timestamp_line).group(1)
-      # print(timestamp_line)
       return timestamp_line
-
 
 if __name__ == '__main__':
    conn = create_connection("./test.db")
@@ -83,7 +91,7 @@ if __name__ == '__main__':
 
    init_coverage_count = get_coverage_count()
 
-   example_values = [(cnt, 'type' + str(cnt), 'description' + str(cnt), 'count of coverage before running fuzzer, here we go increased coverage count', now, 0, init_coverage_count)]
+   example_values = [(cnt, 'type' + str(cnt), 'coverage count before fuzzing', '', now, 0, init_coverage_count)]
    for data in example_values:
       insert_example_values(conn, data)
    select_all_rows(conn)
@@ -99,7 +107,7 @@ if __name__ == '__main__':
          ret_arr = ', '.join(map(str, ret_arr))
          current_coverage_count = get_coverage_count() - init_coverage_count
          init_coverage_count = get_coverage_count()
-         example_values = [(cnt, 'type' + str(cnt), 'description' + str(cnt), ret_arr, get_timestamp_from_coverage(current_coverage_count), 0, current_coverage_count)]
+         example_values = [(cnt, 'type' + str(cnt), 'description' + str(cnt), ret_arr, get_timestamp_from_coverage(current_coverage_count), 0, get_coverage_count())]
          for data in example_values:
             insert_example_values(conn, data)
          select_all_rows(conn)
