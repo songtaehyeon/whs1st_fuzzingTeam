@@ -16,8 +16,6 @@ ONVIF 자체에서 RTP/RTSP  프로토콜을 구현 하는게 아니라 카메�
 ONVIF 프로토콜 공식 문서 (https://www.onvif.org/wp-content/uploads/2016/12/ONVIF_WG-APG-Application_Programmers_Guide-1.pdf) 를 이용해서 INPUT을 받는 위치를 찾아서 그 위치에 랜덤한 값을 넣어 줍니다.
 이때 뮤테이션 전략으로 4가지를 사용했는데
 
-
-
 1. <태그>와 </태그> 사이의 내용을 변경하는 전략
 
 2. <태그>의 위치를 랜덤하게 변경하는 전략
@@ -26,51 +24,7 @@ ONVIF 프로토콜 공식 문서 (https://www.onvif.org/wp-content/uploads/2016/
 
 4. 랜덤한 위치에 랜덤한 문자열 삽입 
 
-
-
-예시를 들자면
-
-
-
-#1. ONVIF ContinousMove (카메라의 움직임)
-
-<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
- xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl"
- xmlns:tt="http://www.onvif.org/ver10/schema">
- <soap:Body>
- <tptz:ContinuousMove>
- <tptz:ProfileToken>Profile1</tptz:ProfileToken>
- <tptz:Velocity>
- <tt:PanTilt x="1" y="1"/>
- <tt:Zoom x="1"/>
- </tptz:Velocity>
- </tptz:ContinuousMove>
- </soap:Body>
-</soap:Envelope>
-
-
-#1-1 . 변경 후
-
-<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
- xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl"
- xmlns:tt="http://www.onvif.org/ver10/schema">
- <soap:Body>
- <tptz:ContinuousMove>
- <tptz:ProfileToken>Profile1</tptz:ProfileToken>
- <tptz:Velocity>
- <tt:PanTilt x="31415926535" y="1"/> #x 좌표의 숫자를 랜덤하게 변경
- <tt:Zoom x="1"/>
- </tptz:Velocity>
- </tptz:ContinuousMove>
- </soap:Body>
-</soap:Envelope>
-
-
-이런식으로 값을 변경한후 Crash가 난다면(많은 코드를 커버한다면) , 그 곳이 취약점이 터질수 있는 곳으로 기록합니다.
-
-
+입니다.
 
 4. 기록? 기록을 한다고?
 밑에 있는 Github 주소를 가면 python tool이 있는데 그 Tool을 실행 해보면 , IP를 입력 받고 (해당 IP는 대상 기기 즉 , IP 카메라입니다) 그 IP에 랜덤한 ONVIF 프로토콜을 날려서 코드 커버리지( 코드를 얼마나 커버 했는가 ) 를 DB 파일로 저장을 합니다. 해당 DB파일을 보면 어느 프로토콜에서 Crash가 나는지 , 얼마나 많은 커버리지를 기록했는지 나옵니다.
